@@ -1,0 +1,34 @@
+= Haralyzer
+Windows HAR viewer written in Go.
+
+== Usage
+The easiest way to use this program is by running the binary which is found in the 'build' map. It is a standalone executable compiled for 64-bit versions of Windows, and should work from Windows 7 upwards.
+
+=== Viewing a file
+Viewing a Har file can be done by first loading a selected file. This can be done by clicking the 'File' menu at the top of the application, followed by clicking 'Open'. A file dialog will appear, after which the corresponding file can be opened.
+
+Upon successfully loading a file, a new tab will appear in the application. The tab contains a table. Any row in the table can be double-clicked, which will spawn a new window. This window contains in-depth details regarding the selected entry.
+
+=== Hash executable
+In order to verify that you are using the correct executable, make sure that the executable hash matches the one found in the link:CHANGELOG.adoc[changelog].
+
+=== Compiling
+The application can be compiled as well. Doing so requires the Go distribution to be installed on the system. Installation instructions for this can be found https://golang.org/doc/install[here].
+
+Upon installing the relevant Go distribution the https://github.com/lxn/walk[walk] library needs to be installed as well, as this takes care of rendering the GUI.
+
+Compiling is done using the following command.
+
+`go build -o build/haralyzer.exe -tags walk_use_cgo -ldflags="-H windowsgui"`
+
+== Known issues
+    * Loading the window for the entry takes long
+    ** This happens when the response/request body contains a lot of data. This will be addressed in future versions. For now, please wait as the window appears, it should not take more than 2-3 seconds.
+    * The response body scroll does not scroll down by keyboard
+    ** This is a known limitation of walk, and will be addressed in future versions.
+    ** https://github.com/lxn/walk/issues/577
+
+== License
+The source code is made available under the Mozilla Public License 2.0, which can be viewed link:LICENSE[here].
+
+The application makes use of the https://github.com/lxn/walk[walk] library, its license can be found https://github.com/lxn/walk/blob/master/LICENSE[here].
